@@ -1,0 +1,52 @@
+version: '3'
+services:
+  flask:
+    # Путь до Dockerfile
+    build: ./
+    # Имя для создаваемого контейнера
+    container_name: backend-flask
+    # Создание переменных окружения в контейнере
+    environment:
+      # для отладки (при запуске в релиз убрать!)
+      - FLASK_ENV=development
+      ## Позволяет отслеживать процесс работы приложения в командной строке
+      - PYTHONUNBUFFERED=True
+      ##
+    # Перезапускаем сервис в случае падения 
+    restart: on-failure
+    # Прокладывам путь для файлов. Все файлы, которые хранятся у вас в 
+    # директории ./backend, появятся в директории контейнера /backend
+    volumes:
+      - /root/hooont77-main/backend:/backend
+    # Открываем порт в контейнер
+    # Порт, который будет смотреть наружу : порт который используется внутри контейнера
+    networks:
+      - net
+    command: python /backend/flask_app.py
+
+  tgbot:
+    # Путь до Dockerfile
+    build: ./
+    # Имя для создаваемого контейнера
+    container_name: telegram-bot
+    # Создание переменных окружения в контейнере
+    environment:
+      ## Позволяет отслеживать процесс работы приложения в командной строке
+      - PYTHONUNBUFFERED=True
+      ##
+    # Перезапускаем сервис в случае падения 
+    restart: on-failure
+    # Прокладывам путь для файлов. Все файлы, которые хранятся у вас в 
+    # директории ./backend, появятся в директории контейнера /backend
+    volumes:
+      - /root/hooont77-main/backend:/backend
+    # Открываем порт в контейнер
+    # Порт, который будет смотреть наружу : порт который используется внутри контейнера
+    networks:
+      - net
+    command: python /backend/bot_main.py
+
+networks:
+  net:
+    name: net
+    external: true

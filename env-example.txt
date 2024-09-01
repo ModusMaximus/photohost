@@ -1,0 +1,5 @@
+TOKEN=
+DB_PSQL=sqlite+aiosqlite:///main.db
+DOMEN='http://127.0.0.1:5000'
+SUPPORT_CONTACT_TG=''
+ADMIN_ID='393542908'

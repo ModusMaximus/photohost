@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотохостинг</title>
+    <link rel="stylesheet" href="../static/style/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Фотохостинг</h1>
+    </header>
+    <main class="main">
+        <div class="image">
+            {% for i in data %}
+            <img src="../static/image/{{i}}.jpg" alt=""><br>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
